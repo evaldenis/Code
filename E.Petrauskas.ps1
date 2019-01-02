@@ -1,9 +1,3 @@
-<#Evaldas Petrauskas 
-+37062993517
-petrauskasevaldas92@gmail.com
-#>
-
-
 <# TASK:
 Please write a script (PowerShell / PowerCLI), which will assign virtual machines to predefined DRS group and Resource Pool:
 In vm notes there should be 2 additional lines of information defining service level (to which resource pool should vm go) and DRS group accord to datacenter site:
@@ -60,10 +54,10 @@ foreach ($vm in $allvms) {
 			if ($vm.resourcepool.name -ne "Better") {Move-VM -VM $vm -Destination "Better" -RunAsync}
 		}
 		if ($vm.notes -like "*SiteAffinity: DC1_VMs*") {
-			if (($vm|Get-DrsClusterGroup).name -ne "DC1_VM") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VM -VM $vm -add}
+			if (($vm|Get-DrsClusterGroup).name -ne "DC1_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VM -VM $vm -add}
 		}	
 		if ($vm.notes -like "*SiteAffinity: DC2_VMs*") {
-			if (($vm|Get-DrsClusterGroup).name -ne "DC2_VM") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VM -VM $vm -add}
+			if (($vm|Get-DrsClusterGroup).name -ne "DC2_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VM -VM $vm -add}
 		}	
 	}	
 	else {
@@ -71,10 +65,10 @@ foreach ($vm in $allvms) {
 			if ($vm.resourcepool.name -ne "Good") {Move-VM -VM $vm -Destination "Good" -RunAsync}
 		}
 		if ($vm.notes -notlike "*SiteAffinity:*") {
-			if (($vm|Get-Datastore).name -eq "Big_datastore_DC1_sample" ) {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VM -VM $vm -add}
+			if (($vm|Get-Datastore).name -eq "Big_datastore_DC1_sample" ) {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VMs -VM $vm -add}
 		}
 		if ($vm.notes -notlike "*SiteAffinity:*") {
-			if (($vm|Get-Datastore).name -eq "Big_datastore_DC2_sample" ) {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VM -VM $vm -add}
+			if (($vm|Get-Datastore).name -eq "Big_datastore_DC2_sample" ) {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VMs -VM $vm -add}
 		}
 	}
 		
@@ -122,17 +116,7 @@ foreach ($vm in $allvms) {
 
 
 
-
-
-
-
-
-
-
-
-
 <#Evaldas Petrauskas 
-+37062993517
 petrauskasevaldas92@gmail.com
 #>
 
