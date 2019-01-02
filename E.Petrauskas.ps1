@@ -54,10 +54,10 @@ foreach ($vm in $allvms) {
 			if ($vm.resourcepool.name -ne "Better") {Move-VM -VM $vm -Destination "Better" -RunAsync}
 		}
 		if ($vm.notes -like "*SiteAffinity: DC1_VMs*") {
-			if (($vm|Get-DrsClusterGroup).name -ne "DC1_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VM -VM $vm -add}
+			if (($vm|Get-DrsClusterGroup).name -ne "DC1_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC1_VMs -VM $vm -add}
 		}	
 		if ($vm.notes -like "*SiteAffinity: DC2_VMs*") {
-			if (($vm|Get-DrsClusterGroup).name -ne "DC2_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VM -VM $vm -add}
+			if (($vm|Get-DrsClusterGroup).name -ne "DC2_VMs") {($vm|Get-DrsClusterGroup)|Set-DrsClusterGroup -VM $vm -remove; Set-DrsClusterGroup -DrsClusterGroup DC2_VMs -VM $vm -add}
 		}	
 	}	
 	else {
